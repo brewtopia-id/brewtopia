@@ -1,0 +1,1475 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BrewTopia — Premium Artisan Coffee Beans Indonesia</title>
+    <meta name="description"
+        content="BrewTopia menghadirkan biji kopi premium pilihan dari tanah Nusantara: Arabica Gayo, Mandailing, Java Preanger, dan Toraja. Cita rasa otentik dalam setiap seduhan.">
+
+    <!-- Google Fonts: Poppins & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <!-- Top Announcement Bar -->
+    <div class="announcement-bar" id="announcementBar">
+        <div class="container announcement-content">
+            <span class="announcement-badge">✨ PROMO SPESIAL</span>
+            <span>Gunakan kode <strong>BREW15</strong> untuk diskon 15% pesanan pertamamu! Bebas Ongkir
+                se-Indonesia*</span>
+            <button class="btn-claim-mini" id="topClaimBtn" onclick="claimPromo('BREW15')">Klaim Sekarang</button>
+        </div>
+    </div>
+
+    <!-- Main Navigation -->
+    <header class="header" id="mainHeader">
+        <div class="container navbar">
+            <!-- Brand Logo -->
+            <a href="#home" class="brand-logo" id="brandLogo">
+                <div class="logo-icon-wrapper">
+                    <svg class="logo-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M17 8h1a4 4 0 1 1 0 8h-1"></path>
+                        <path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"></path>
+                        <line x1="6" y1="2" x2="6" y2="4"></line>
+                        <line x1="10" y1="2" x2="10" y2="4"></line>
+                        <line x1="14" y1="2" x2="14" y2="4"></line>
+                    </svg>
+                </div>
+                <div class="logo-text-group">
+                    <span class="logo-name">BrewTopia</span>
+                    <span class="logo-tagline">Artisan Coffee Roasters</span>
+                </div>
+            </a>
+
+            <!-- Desktop Navigation Menu -->
+            <nav class="nav-menu" id="navMenu">
+                <ul class="nav-list">
+                    <li class="nav-item"><a href="#home" class="nav-link active">Home</a></li>
+                    <li class="nav-item"><a href="#shop" class="nav-link">Shop</a></li>
+                    <li class="nav-item"><a href="#categories" class="nav-link">Categories</a></li>
+                    <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
+                    <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
+                </ul>
+            </nav>
+
+            <!-- Nav Actions (Search & Cart) -->
+            <div class="nav-actions">
+                <!-- Search Input Bar -->
+                <div class="search-wrapper" id="searchWrapper">
+                    <svg class="action-icon search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                    <input type="text" id="searchInput" class="search-input" placeholder="Cari kopi Nusantara..."
+                        aria-label="Cari produk kopi" autocomplete="off">
+                    <button class="search-clear-btn" id="searchClearBtn" aria-label="Hapus pencarian">&times;</button>
+
+                    <!-- Live Search Results Dropdown -->
+                    <div class="search-dropdown" id="searchDropdown">
+                        <div class="search-results-list" id="searchResultsList"></div>
+                    </div>
+                </div>
+
+                <!-- Cart Button -->
+                <button class="cart-btn" id="cartToggleBtn" aria-label="Buka keranjang belanja">
+                    <svg class="action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="9" cy="21" r="1"></circle>
+                        <circle cx="20" cy="21" r="1"></circle>
+                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                    </svg>
+                    <span class="cart-badge" id="cartCountBadge">0</span>
+                </button>
+
+                <!-- User Account Button -->
+                <button class="nav-user-btn" id="navUserBtn" onclick="handleUserNavClick()" aria-label="Akun Pengguna">
+                    <div class="user-avatar-mini" id="userAvatarMini">
+                        <svg class="action-icon user-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                    </div>
+                    <span class="user-nav-label" id="userNavLabel">Masuk / Daftar</span>
+                </button>
+
+                <!-- Mobile Menu Toggle -->
+                <button class="mobile-toggle-btn" id="mobileMenuBtn" aria-label="Buka navigasi mobile">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Drawer Navigation -->
+    <div class="mobile-nav-drawer" id="mobileNavDrawer">
+        <div class="mobile-nav-header">
+            <span class="logo-name">BrewTopia</span>
+            <button class="close-drawer-btn" id="closeMobileNavBtn">&times;</button>
+        </div>
+
+        <!-- Mobile User Card -->
+        <div class="mobile-user-card" id="mobileUserCard" onclick="handleUserNavClick(); closeMobileMenu();">
+            <div class="mobile-user-avatar" id="mobileUserAvatar">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+            </div>
+            <div class="mobile-user-info">
+                <strong id="mobileUserName">Masuk / Daftar</strong>
+                <span id="mobileUserSubtitle">Klaim Diskon 15% & Poin Kopi</span>
+            </div>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="mobile-user-arrow">
+                <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+        </div>
+
+        <ul class="mobile-nav-list">
+            <li><a href="#home" class="mobile-nav-link" onclick="closeMobileMenu()">Home</a></li>
+            <li><a href="#shop" class="mobile-nav-link" onclick="closeMobileMenu()">Shop</a></li>
+            <li><a href="#categories" class="mobile-nav-link" onclick="closeMobileMenu()">Categories</a></li>
+            <li><a href="#about" class="mobile-nav-link" onclick="closeMobileMenu()">About</a></li>
+            <li><a href="#contact" class="mobile-nav-link" onclick="closeMobileMenu()">Contact</a></li>
+        </ul>
+        <div class="mobile-nav-footer">
+            <p>Cita Rasa Kopi Nusantara Terbaik</p>
+            <div class="promo-pill-mini" onclick="claimPromo('BREW15')">Diskon 15% Kode: <strong>BREW15</strong></div>
+        </div>
+    </div>
+    <div class="backdrop" id="drawerBackdrop"></div>
+
+    <!-- Hero Section -->
+    <section class="hero-section" id="home">
+        <div class="container hero-grid">
+            <!-- Hero Content -->
+            <div class="hero-text-content">
+                <div class="hero-tag">
+                    <span class="gold-star">★</span> 100% Indonesian Specialty Coffee Beans
+                </div>
+                <h1 class="hero-headline">
+                    Brew Your Day, <br>
+                    <span class="highlight-text">One Cup</span> at a Time.
+                </h1>
+                <p class="hero-subheadline">
+                    Nikmati kemewahan biji kopi premium pilihan langsung dari petani terbaik Nusantara. Dipanggang
+                    secara presisi dengan cita rasa autentik, aroma memikat, dan kehangatan sempurna di setiap seduhan.
+                </p>
+                <div class="hero-cta-group">
+                    <a href="#shop" class="btn btn-primary btn-hero">
+                        <span>Shop Now</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" class="btn-icon">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                    </a>
+                    <a href="#about" class="btn btn-outline btn-hero">
+                        <span>Our Story</span>
+                    </a>
+                </div>
+
+                <!-- Trust Badges -->
+                <div class="hero-features">
+                    <div class="feature-badge">
+                        <div class="feature-icon">🌿</div>
+                        <div class="feature-info">
+                            <strong>Single Origin</strong>
+                            <span>100% Asli Daerah</span>
+                        </div>
+                    </div>
+                    <div class="feature-badge">
+                        <div class="feature-icon">🔥</div>
+                        <div class="feature-info">
+                            <strong>Freshly Roasted</strong>
+                            <span>Batch Kecil Artisan</span>
+                        </div>
+                    </div>
+                    <div class="feature-badge">
+                        <div class="feature-icon">📦</div>
+                        <div class="feature-info">
+                            <strong>Valve Pack</strong>
+                            <span>Aroma Terjaga</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hero Visual -->
+            <div class="hero-image-wrapper">
+                <div class="image-glow-bg"></div>
+                <div class="hero-image-card">
+                    <img src="./assets/hero_coffee.jpg"
+                        alt="Biji kopi sangrai premium dan secangkir kopi hangat BrewTopia" class="hero-img"
+                        loading="eager">
+
+                    <!-- Floating Highlight Cards -->
+                    <div class="floating-badge badge-top-right">
+                        <div class="badge-icon-gold">☕</div>
+                        <div>
+                            <p class="badge-title">Grade 1 Specialty</p>
+                            <p class="badge-desc">Cupping Score 85+</p>
+                        </div>
+                    </div>
+
+                    <div class="floating-badge badge-bottom-left">
+                        <div class="badge-avatar-group">
+                            <span class="rating-stars">★★★★★</span>
+                            <span class="rating-score">4.9 / 5.0</span>
+                        </div>
+                        <p class="badge-desc">Dipercaya 10.000+ Penikmat Kopi</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="section categories-section" id="categories">
+        <div class="container">
+            <div class="section-header text-center">
+                <span class="section-subtitle">Kategori Pilihan</span>
+                <h2 class="section-title">Temukan Gaya Seduh Favoritmu</h2>
+                <p class="section-description">Pilihan kopi terbaik mulai dari biji utuh segar, bubuk siap seduh, cold
+                    brew botol, hingga paket gift set eksklusif.</p>
+            </div>
+
+            <div class="categories-grid">
+                <!-- Category 1: Coffee Beans -->
+                <div class="category-card" onclick="filterByCategory('beans')" data-category="beans">
+                    <div class="category-icon-box">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <ellipse cx="12" cy="12" rx="7" ry="9" transform="rotate(30 12 12)"></ellipse>
+                            <path d="M10 5.5 C 13 8, 11 16, 14 18.5"></path>
+                        </svg>
+                    </div>
+                    <h3 class="category-name">Coffee Beans</h3>
+                    <p class="category-desc">Biji kopi utuh sangrai segar untuk cita rasa maksimal dan kebebasan tingkat
+                        gilingan.</p>
+                    <span class="category-link">
+                        Jelajahi Produk
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="link-arrow">
+                            <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                    </span>
+                </div>
+
+                <!-- Category 2: Ground Coffee -->
+                <div class="category-card" onclick="filterByCategory('ground')" data-category="ground">
+                    <div class="category-icon-box">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M6 3h12l-1.5 8h-9L6 3z"></path>
+                            <path d="M4 14h16v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-6z"></path>
+                            <line x1="12" y1="17" x2="12" y2="19"></line>
+                        </svg>
+                    </div>
+                    <h3 class="category-name">Ground Coffee</h3>
+                    <p class="category-desc">Bubuk kopi presisi dengan opsi gilingan Espresso, V60 Pourover, hingga
+                        Tubruk.</p>
+                    <span class="category-link">
+                        Jelajahi Produk
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="link-arrow">
+                            <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                    </span>
+                </div>
+
+                <!-- Category 3: Ready to Drink -->
+                <div class="category-card" onclick="filterByCategory('rtd')" data-category="rtd">
+                    <div class="category-icon-box">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="7" y="7" width="10" height="14" rx="3"></rect>
+                            <path d="M10 2h4v5h-4z"></path>
+                            <line x1="10" y1="12" x2="14" y2="12"></line>
+                        </svg>
+                    </div>
+                    <h3 class="category-name">Ready to Drink</h3>
+                    <p class="category-desc">Cold Brew konsentrat & artisan bottled coffee siap nikmati kapan saja dan
+                        di mana saja.</p>
+                    <span class="category-link">
+                        Jelajahi Produk
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="link-arrow">
+                            <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                    </span>
+                </div>
+
+                <!-- Category 4: Gift Set -->
+                <div class="category-card" onclick="filterByCategory('gift')" data-category="gift">
+                    <div class="category-icon-box">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="20 12 20 22 4 22 4 12"></polyline>
+                            <rect x="2" y="7" width="20" height="5" rx="1"></rect>
+                            <line x1="12" y1="22" x2="12" y2="7"></line>
+                            <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path>
+                            <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="category-name">Gift Set</h3>
+                    <p class="category-desc">Paket hampers eksklusif berisi seleksi kopi istimewa dan aksesoris seduh
+                        elegan.</p>
+                    <span class="category-link">
+                        Jelajahi Produk
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="link-arrow">
+                            <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products Section -->
+    <section class="section products-section" id="shop">
+        <div class="container">
+            <div class="section-header-flex">
+                <div>
+                    <span class="section-subtitle">Koleksi Terlaris</span>
+                    <h2 class="section-title">Single Origin Series</h2>
+                    <p class="section-description">Karakteristik unik dari 4 pulau penghasil kopi terbaik di nusantara.
+                    </p>
+                </div>
+
+                <!-- Filter Tabs -->
+                <div class="filter-pills" id="filterPills">
+                    <button class="filter-pill active" onclick="setProductFilter('all')">Semua Kopi</button>
+                    <button class="filter-pill" onclick="setProductFilter('sumatra')">Sumatra</button>
+                    <button class="filter-pill" onclick="setProductFilter('java')">Java</button>
+                    <button class="filter-pill" onclick="setProductFilter('sulawesi')">Sulawesi</button>
+                </div>
+            </div>
+
+            <!-- Products Grid -->
+            <div class="products-grid" id="productsContainer">
+                <!-- Rendered dynamically by app.js for full state synchronization -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Promo Banner Section -->
+    <section class="promo-section" id="promo">
+        <div class="container">
+            <div class="promo-banner-card">
+                <div class="promo-decor-circle circle-1"></div>
+                <div class="promo-decor-circle circle-2"></div>
+
+                <div class="promo-content">
+                    <div class="promo-badge">
+                        <span class="sparkle">✨</span> PENAWARAN EKSKLUSIF PELANGGAN BARU
+                    </div>
+                    <h2 class="promo-title">
+                        New Customer Promo — <span class="promo-highlight">Diskon 15%</span>
+                    </h2>
+                    <p class="promo-description">
+                        Awali perjalanan rasa kopimu bersama BrewTopia. Dapatkan diskon 15% untuk pembelian pertama
+                        dengan kode voucher <strong>BREW15</strong>.
+                    </p>
+                    <div class="promo-actions">
+                        <button class="btn btn-claim" id="claimPromoBtn" onclick="claimPromo('BREW15')">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                class="btn-icon">
+                                <path d="M20 12v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-6"></path>
+                                <path d="M12 2v14"></path>
+                                <polyline points="19 9 12 2 5 9"></polyline>
+                            </svg>
+                            <span>Claim Promo (15% OFF)</span>
+                        </button>
+                        <span class="promo-terms">*Syarat & Ketentuan berlaku. Otomatis diterapkan saat checkout.</span>
+                    </div>
+                </div>
+
+                <div class="promo-badge-visual">
+                    <div class="promo-stamp">
+                        <span class="stamp-sub">HEMAT</span>
+                        <span class="stamp-main">15%</span>
+                        <span class="stamp-code">KODE: BREW15</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Us Section -->
+    <section class="section about-section" id="about">
+        <div class="container about-grid">
+            <!-- About Visual -->
+            <div class="about-image-wrapper">
+                <div class="about-image-card">
+                    <img src="./assets/about_brew.jpg" alt="Barista BrewTopia menyeduh kopi pour over manual brew"
+                        class="about-img" loading="lazy">
+                    <div class="about-stat-card">
+                        <div class="stat-number">100%</div>
+                        <div class="stat-label">Biji Kopi Lokal Pilihan Nusantara</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- About Text -->
+            <div class="about-text-content">
+                <span class="section-subtitle">Tentang BrewTopia</span>
+                <h2 class="section-title">Dedikasi untuk Kemurnian Kopi Indonesia</h2>
+                <p class="about-lead">
+                    BrewTopia lahir dari kecintaan mendalam terhadap kekayaan alam Nusantara dan kerja keras para petani
+                    kopi lokal dari Sabang hingga Merauke.
+                </p>
+                <p class="about-body">
+                    Kami bermitra langsung dengan komunitas petani di dataran tinggi Gayo Aceh, Mandailing Sumatra,
+                    pegunungan Java Preanger, dan perbukitan mistis Toraja Sulawesi. Setiap biji kopi dipetik saat
+                    matang sempurna, diproses dengan standar ketat, dan disangrai dalam batch kecil oleh artisan roaster
+                    kami untuk mengunci kompleksitas aroma dan rasa terbaiknya.
+                </p>
+
+                <div class="about-values-grid">
+                    <div class="value-item">
+                        <div class="value-bullet">01</div>
+                        <div>
+                            <h4 class="value-title">Fair Trade & Direct Trade</h4>
+                            <p class="value-desc">Memberdayakan petani lokal dengan harga beli yang adil dan
+                                berkelanjutan.</p>
+                        </div>
+                    </div>
+                    <div class="value-item">
+                        <div class="value-bullet">02</div>
+                        <div>
+                            <h4 class="value-title">Artisan Micro-Roasting</h4>
+                            <p class="value-desc">Profil sangrai dirancang presisi untuk menonjolkan notes rasa alami
+                                setiap origin.</p>
+                        </div>
+                    </div>
+                    <div class="value-item">
+                        <div class="value-bullet">03</div>
+                        <div>
+                            <h4 class="value-title">Kesegaran Terjamin</h4>
+                            <p class="value-desc">Dikemas dengan one-way degassing valve untuk menjaga kesegaran hingga
+                                ke cangkirmu.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact & Newsletter Section -->
+    <section class="section contact-section" id="contact">
+        <div class="container">
+            <div class="newsletter-card">
+                <div class="newsletter-info">
+                    <span class="section-subtitle gold">Hubungi Kami & Komunitas</span>
+                    <h2 class="newsletter-title">Ingin Konsultasi Seduh atau Pemesanan Khusus?</h2>
+                    <p class="newsletter-desc">Tim roastery kami siap membantu memilihkan profil kopi yang sesuai dengan
+                        seleramu atau kebutuhan cafe & kantor.</p>
+                </div>
+                <div class="newsletter-form-box">
+                    <div class="contact-buttons-group">
+                        <a href="https://wa.me/6281234567890?text=Halo%20BrewTopia,%20saya%20tertarik%20dengan%20koleksi%20kopi%20premium%20Anda."
+                            target="_blank" rel="noopener" class="btn btn-whatsapp">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                class="btn-icon">
+                                <path
+                                    d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z">
+                                </path>
+                            </svg>
+                            <span>Chat via WhatsApp</span>
+                        </a>
+                        <a href="mailto:hello@brewtopia.co.id" class="btn btn-outline-light">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                class="btn-icon">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
+                                </path>
+                                <polyline points="22,6 12,13 2,6"></polyline>
+                            </svg>
+                            <span>hello@brewtopia.co.id</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-brand-col">
+                <a href="#home" class="brand-logo footer-logo">
+                    <div class="logo-icon-wrapper">
+                        <svg class="logo-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 8h1a4 4 0 1 1 0 8h-1"></path>
+                            <path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"></path>
+                            <line x1="6" y1="2" x2="6" y2="4"></line>
+                            <line x1="10" y1="2" x2="10" y2="4"></line>
+                            <line x1="14" y1="2" x2="14" y2="4"></line>
+                        </svg>
+                    </div>
+                    <div class="logo-text-group">
+                        <span class="logo-name">BrewTopia</span>
+                        <span class="logo-tagline">Artisan Coffee Roasters</span>
+                    </div>
+                </a>
+                <p class="footer-tagline-text">
+                    Penyedia biji kopi nusantara pilihan berstandar specialty. Menghadirkan kenikmatan rasa jujur dari
+                    tanah Indonesia langsung ke cangkirmu.
+                </p>
+
+                <!-- Social Media Icons -->
+                <div class="social-links">
+                    <a href="https://instagram.com" target="_blank" rel="noopener" class="social-link"
+                        aria-label="Instagram BrewTopia">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                        </svg>
+                    </a>
+                    <a href="https://tiktok.com" target="_blank" rel="noopener" class="social-link"
+                        aria-label="TikTok BrewTopia">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path>
+                        </svg>
+                    </a>
+                    <a href="https://wa.me/6281234567890" target="_blank" rel="noopener" class="social-link"
+                        aria-label="WhatsApp BrewTopia">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path
+                                d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z">
+                            </path>
+                        </svg>
+                    </a>
+                    <a href="https://youtube.com" target="_blank" rel="noopener" class="social-link"
+                        aria-label="YouTube BrewTopia">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path
+                                d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z">
+                            </path>
+                            <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Footer Nav Column -->
+            <div class="footer-links-col">
+                <h4 class="footer-heading">Navigasi Cepat</h4>
+                <ul class="footer-links-list">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#shop">Shop</a></li>
+                    <li><a href="#categories">Categories</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+
+            <!-- Origins Column -->
+            <div class="footer-links-col">
+                <h4 class="footer-heading">Single Origins</h4>
+                <ul class="footer-links-list">
+                    <li><a href="#shop" onclick="setProductFilter('sumatra')">Arabica Gayo (Aceh)</a></li>
+                    <li><a href="#shop" onclick="setProductFilter('sumatra')">Mandailing (Sumatra)</a></li>
+                    <li><a href="#shop" onclick="setProductFilter('java')">Java Preanger (Jawa Barat)</a></li>
+                    <li><a href="#shop" onclick="setProductFilter('sulawesi')">Toraja (Sulawesi Selatan)</a></li>
+                </ul>
+            </div>
+
+            <!-- Location / Hours Column -->
+            <div class="footer-links-col">
+                <h4 class="footer-heading">Roastery & HQ</h4>
+                <p class="footer-address">
+                    Jl. Senopati No. 42, Kebayoran Baru<br>
+                    Jakarta Selatan, 12190<br>
+                    Indonesia
+                </p>
+                <p class="footer-hours">
+                    Senin - Minggu: 08.00 - 21.00 WIB
+                </p>
+            </div>
+        </div>
+
+        <!-- Copyright -->
+        <div class="footer-bottom">
+            <div class="container footer-bottom-flex">
+                <p>© 2026 BrewTopia. All rights reserved.</p>
+                <p class="footer-made">Crafted with passion for Indonesian Specialty Coffee ☕</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Slide-out Cart Drawer -->
+    <div class="cart-drawer" id="cartDrawer">
+        <div class="cart-drawer-header">
+            <div class="cart-header-title">
+                <h3>Keranjang Belanja</h3>
+                <span class="cart-items-count" id="cartHeaderCount">(0 item)</span>
+            </div>
+            <button class="close-cart-btn" id="closeCartBtn" aria-label="Tutup keranjang">&times;</button>
+        </div>
+
+        <!-- Promo Banner inside Cart -->
+        <div class="cart-promo-pill" id="cartPromoAlert">
+            <div class="cart-promo-left">
+                <span class="tag-icon">🏷️</span>
+                <div>
+                    <strong id="cartPromoTitle">Diskon 15% Pembelian Pertama</strong>
+                    <p class="cart-promo-sub">Gunakan kode <strong>BREW15</strong></p>
+                </div>
+            </div>
+            <button class="cart-promo-apply-btn" id="cartPromoApplyBtn" onclick="claimPromo('BREW15')">Terapkan</button>
+        </div>
+
+        <!-- Cart Items Body -->
+        <div class="cart-drawer-body" id="cartItemsList">
+            <!-- Rendered dynamically -->
+        </div>
+
+        <!-- Cart Footer & Calculation -->
+        <div class="cart-drawer-footer" id="cartDrawerFooter">
+            <div class="cart-summary-row">
+                <span>Subtotal</span>
+                <span id="cartSubtotal">Rp0</span>
+            </div>
+            <div class="cart-summary-row discount-row" id="cartDiscountRow" style="display: none;">
+                <span>Diskon Promo (15%)</span>
+                <span class="discount-val" id="cartDiscountAmount">-Rp0</span>
+            </div>
+            <div class="cart-summary-row total-row">
+                <span>Total Pembayaran</span>
+                <span class="total-val" id="cartTotal">Rp0</span>
+            </div>
+
+            <button class="btn btn-primary btn-checkout" id="checkoutBtn" onclick="openCheckoutModal()">
+                <span>Lanjut ke Pembayaran</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-icon">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Quick View Modal -->
+    <div class="modal" id="quickViewModal">
+        <div class="modal-content quickview-modal-content">
+            <button class="modal-close-btn" id="closeQuickViewBtn">&times;</button>
+            <div class="quickview-grid" id="quickViewContent">
+                <!-- Rendered dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Checkout Confirmation Modal -->
+    <div class="modal" id="checkoutModal">
+        <div class="modal-content checkout-modal-content">
+            <button class="modal-close-btn" id="closeCheckoutBtn">&times;</button>
+            <div class="checkout-header text-center">
+                <div class="checkout-icon-check">✓</div>
+                <h3>Konfirmasi Pesanan BrewTopia</h3>
+                <p>Pesanan Anda siap diteruskan ke WhatsApp Roaster untuk pengiriman instan.</p>
+            </div>
+
+            <div class="checkout-details-box" id="checkoutDetailsBox">
+                <!-- Rendered dynamically -->
+            </div>
+
+            <div class="checkout-actions">
+                <button class="btn btn-whatsapp btn-full" id="confirmWhatsAppCheckoutBtn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-icon">
+                        <path
+                            d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z">
+                        </path>
+                    </svg>
+                    <span>Kirim Pesanan via WhatsApp</span>
+                </button>
+                <button class="btn btn-outline btn-full" onclick="closeCheckoutModal()">Kembali Belanja</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Gmail Push Notification Simulation Banner -->
+    <div class="gmail-notification-banner" id="gmailNotificationBanner">
+        <div class="gmail-banner-left">
+            <div class="gmail-icon-wrapper">
+                <svg viewBox="0 0 48 48" width="24" height="24">
+                    <path fill="#4285F4"
+                        d="M45,16.2l-5,2.75V37c0,2.21-1.79,4-4,4H12c-2.21,0-4-1.79-4-4V18.95l-5-2.75C2.39,15.86,2,15.2,2,14.5v-6C2,7.12,3.12,6,4.5,6c0.57,0,1.1,0.2,1.5,0.56L24,20l18-13.44C42.4,6.2,42.93,6,43.5,6C44.88,6,46,7.12,46,8.5v6C46,15.2,45.61,15.86,45,16.2z" />
+                    <path fill="#34A853" d="M8,37c0,2.21,1.79,4,4,4h5V26.5L8,19V37z" />
+                    <path fill="#EA4335" d="M40,37c0,2.21-1.79,4-4,4h-5V26.5L40,19V37z" />
+                    <path fill="#FBBC05" d="M31,26.5V41h-7V26.5L24,20L31,26.5z" />
+                </svg>
+            </div>
+            <div class="gmail-banner-text">
+                <div class="gmail-banner-sender">
+                    <span><strong>Gmail</strong> • BrewTopia Security</span>
+                    <span class="gmail-time">Baru saja</span>
+                </div>
+                <div class="gmail-banner-title">Kode Verifikasi: <strong class="gmail-otp-highlight"
+                        id="gmailOtpCodeDisplay">------</strong></div>
+                <p class="gmail-banner-preview">Masukkan kode 6 digit ini untuk mengaktifkan akun Anda di BrewTopia.</p>
+            </div>
+        </div>
+        <div class="gmail-banner-actions">
+            <button class="gmail-copy-btn" id="gmailCopyOtpBtn" onclick="autoFillOTP()">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+                <span>Salin & Isi</span>
+            </button>
+            <button class="gmail-close-btn" onclick="dismissGmailNotification()">&times;</button>
+        </div>
+    </div>
+
+    <!-- Auth Modal (Login, Register with Gmail OTP, Create Password) -->
+    <div class="modal" id="authModal">
+        <div class="modal-content auth-modal-content">
+            <button class="modal-close-btn" id="closeAuthBtn" onclick="closeAuthModal()">&times;</button>
+
+            <!-- Dynamic Promo Intent Banner inside Auth -->
+            <div class="auth-promo-intent-box" id="authPromoIntentBox" style="display: none;">
+                <div class="auth-intent-icon">🎁</div>
+                <div class="auth-intent-text">
+                    <strong>Syarat Klaim Promo</strong>
+                    <p id="authPromoIntentMessage">Masuk atau Buat Akun terlebih dahulu untuk menggunakan promo <span
+                            class="promo-code-badge" id="authPromoCodeTag">BREW15</span></p>
+                </div>
+            </div>
+
+            <!-- Auth Header -->
+            <div class="auth-header text-center">
+                <div class="auth-brand-logo">
+                    <svg class="logo-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M17 8h1a4 4 0 1 1 0 8h-1"></path>
+                        <path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"></path>
+                        <line x1="6" y1="2" x2="6" y2="4"></line>
+                        <line x1="10" y1="2" x2="10" y2="4"></line>
+                        <line x1="14" y1="2" x2="14" y2="4"></line>
+                    </svg>
+                </div>
+                <h3 class="auth-title" id="authMainTitle">Selamat Datang di BrewTopia</h3>
+                <p class="auth-subtitle" id="authMainSubtitle">Akses promo eksklusif, koleksi kopi artisan & kumpulkan
+                    BrewPoints.</p>
+            </div>
+
+            <!-- Auth Tabs Switcher -->
+            <div class="auth-tabs">
+                <button class="auth-tab-btn active" id="tabBtnLogin" onclick="switchAuthTab('login')">Masuk ke
+                    Akun</button>
+                <button class="auth-tab-btn" id="tabBtnRegister" onclick="switchAuthTab('register')">Daftar Akun
+                    Baru</button>
+            </div>
+
+            <!-- TAB 1: LOGIN PANEL -->
+            <div class="auth-tab-panel active" id="authPanelLogin">
+                <form id="loginForm" onsubmit="handleLoginSubmit(event)" novalidate>
+                    <div class="form-group">
+                        <label class="form-label" for="loginEmail">Email / Gmail</label>
+                        <div class="input-icon-wrapper">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                class="input-icon">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
+                                </path>
+                                <polyline points="22,6 12,13 2,6"></polyline>
+                            </svg>
+                            <input type="email" id="loginEmail" class="form-input" placeholder="contoh: nama@gmail.com"
+                                required autocomplete="email">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="form-label-row">
+                            <label class="form-label" for="loginPassword">Kata Sandi</label>
+                            <a href="javascript:void(0)" class="form-link-sm" onclick="showForgotPasswordAlert()">Lupa
+                                sandi?</a>
+                        </div>
+                        <div class="input-icon-wrapper">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                class="input-icon">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                            </svg>
+                            <input type="password" id="loginPassword" class="form-input"
+                                placeholder="Masukkan kata sandi..." required autocomplete="current-password">
+                            <button type="button" class="btn-toggle-pwd"
+                                onclick="togglePasswordVisibility('loginPassword', this)" aria-label="Lihat kata sandi">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    class="eye-icon">
+                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                    <circle cx="12" cy="12" r="3"></circle>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="form-options-row">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="loginRememberMe" checked>
+                            <span>Ingat saya di perangkat ini</span>
+                        </label>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-full btn-auth-submit" id="loginSubmitBtn">
+                        <span>Masuk ke Akun</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-icon">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                    </button>
+                </form>
+
+                <div class="auth-divider">
+                    <span>atau masuk lebih cepat dengan</span>
+                </div>
+
+                <!-- Google Sign-in Button -->
+                <button type="button" class="btn-google-auth" onclick="openGoogleAccountPicker()">
+                    <svg viewBox="0 0 48 48" class="google-svg-icon" width="20" height="20">
+                        <path fill="#EA4335"
+                            d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z" />
+                        <path fill="#4285F4"
+                            d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z" />
+                        <path fill="#FBBC05"
+                            d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z" />
+                        <path fill="#34A853"
+                            d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z" />
+                    </svg>
+                    <span>Lanjutkan dengan Google</span>
+                </button>
+
+                <p class="auth-switch-text text-center">
+                    Belum punya akun? <a href="javascript:void(0)" onclick="switchAuthTab('register')">Daftar Akun
+                        Baru</a>
+                </p>
+            </div>
+
+            <!-- TAB 2: REGISTER PANEL (MULTI-STEP FLOW) -->
+            <div class="auth-tab-panel" id="authPanelRegister">
+                <!-- Registration Step Indicators -->
+                <div class="register-step-tracker">
+                    <div class="step-track-item active" id="stepIndicator1">
+                        <span class="step-num">1</span>
+                        <span class="step-name">Data Diri</span>
+                    </div>
+                    <div class="step-line" id="stepLine1"></div>
+                    <div class="step-track-item" id="stepIndicator2">
+                        <span class="step-num">2</span>
+                        <span class="step-name">OTP Gmail</span>
+                    </div>
+                    <div class="step-line" id="stepLine2"></div>
+                    <div class="step-track-item" id="stepIndicator3">
+                        <span class="step-num">3</span>
+                        <span class="step-name">Buat Sandi</span>
+                    </div>
+                </div>
+
+                <!-- STEP 1: Full Name & Gmail Input -->
+                <div class="reg-step-container active" id="regStep1">
+                    <form id="regStep1Form" onsubmit="handleRegisterStep1Submit(event)" novalidate>
+                        <div class="form-group">
+                            <label class="form-label" for="regFullName">Nama Lengkap</label>
+                            <div class="input-icon-wrapper">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    class="input-icon">
+                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="12" cy="7" r="4"></circle>
+                                </svg>
+                                <input type="text" id="regFullName" class="form-input" placeholder="contoh: Dana Tias"
+                                    required autocomplete="name">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="regEmail">Alamat Gmail / Email</label>
+                            <div class="input-icon-wrapper">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    class="input-icon">
+                                    <path
+                                        d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
+                                    </path>
+                                    <polyline points="22,6 12,13 2,6"></polyline>
+                                </svg>
+                                <input type="email" id="regEmail" class="form-input"
+                                    placeholder="contoh: danayoga@gmail.com" required autocomplete="email">
+                            </div>
+                            <span class="input-help-text">Kode verifikasi 6 digit akan dikirimkan ke Gmail ini.</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="regPhone">Nomor WhatsApp <span
+                                    class="text-muted-opt">(Opsional)</span></label>
+                            <div class="input-icon-wrapper">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    class="input-icon">
+                                    <path
+                                        d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
+                                    </path>
+                                </svg>
+                                <input type="tel" id="regPhone" class="form-input" placeholder="contoh: 081234567890"
+                                    autocomplete="tel">
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-full btn-auth-submit" id="btnSendOtp">
+                            <span>Kirim Kode Verifikasi ke Gmail</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                class="btn-icon">
+                                <line x1="22" y1="2" x2="11" y2="13"></line>
+                                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                            </svg>
+                        </button>
+                    </form>
+
+                    <div class="auth-divider">
+                        <span>atau daftar instan dengan</span>
+                    </div>
+
+                    <button type="button" class="btn-google-auth" onclick="openGoogleAccountPicker()">
+                        <svg viewBox="0 0 48 48" class="google-svg-icon" width="20" height="20">
+                            <path fill="#EA4335"
+                                d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z" />
+                            <path fill="#4285F4"
+                                d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z" />
+                            <path fill="#FBBC05"
+                                d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z" />
+                            <path fill="#34A853"
+                                d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z" />
+                        </svg>
+                        <span>Daftar Cepat dengan Google</span>
+                    </button>
+                </div>
+
+                <!-- STEP 2: Input OTP Verification Code -->
+                <div class="reg-step-container" id="regStep2">
+                    <div class="otp-instruction-card">
+                        <div class="otp-icon-bubble">📩</div>
+                        <h4>Verifikasi Alamat Gmail</h4>
+                        <p>Kami telah mengirimkan 6 digit kode verifikasi ke:</p>
+                        <div class="target-email-chip" id="targetEmailBadge">
+                            <span>user@gmail.com</span>
+                            <button type="button" class="btn-change-email" onclick="goToRegisterStep(1)"
+                                title="Ubah email">Ubah</button>
+                        </div>
+                    </div>
+
+                    <form id="otpVerificationForm" onsubmit="handleOtpVerificationSubmit(event)">
+                        <div class="form-group text-center">
+                            <label class="form-label" style="justify-content: center;">Masukkan 6 Digit Kode OTP</label>
+
+                            <div class="otp-inputs-wrapper" id="otpInputsWrapper">
+                                <input type="text" maxlength="1" class="otp-digit-input" data-index="0"
+                                    inputmode="numeric" autocomplete="one-time-code" autofocus>
+                                <input type="text" maxlength="1" class="otp-digit-input" data-index="1"
+                                    inputmode="numeric">
+                                <input type="text" maxlength="1" class="otp-digit-input" data-index="2"
+                                    inputmode="numeric">
+                                <input type="text" maxlength="1" class="otp-digit-input" data-index="3"
+                                    inputmode="numeric">
+                                <input type="text" maxlength="1" class="otp-digit-input" data-index="4"
+                                    inputmode="numeric">
+                                <input type="text" maxlength="1" class="otp-digit-input" data-index="5"
+                                    inputmode="numeric">
+                            </div>
+                        </div>
+
+                        <div class="otp-resend-row text-center">
+                            <span id="otpCountdownText">Kirim ulang kode dalam <strong
+                                    id="otpTimerSeconds">60</strong>s</span>
+                            <button type="button" class="btn-resend-otp" id="btnResendOtp" style="display: none;"
+                                onclick="resendGmailOTP()">Kirim Ulang Kode OTP</button>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-full btn-auth-submit" id="btnVerifyOtp">
+                            <span>Verifikasi & Lanjutkan</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                class="btn-icon">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                        </button>
+
+                        <button type="button" class="btn btn-outline btn-full" style="margin-top: 10px;"
+                            onclick="goToRegisterStep(1)">
+                            <span>← Kembali ke Data Diri</span>
+                        </button>
+                    </form>
+                </div>
+
+                <!-- STEP 3: Create Account Password -->
+                <div class="reg-step-container" id="regStep3">
+                    <div class="step3-header">
+                        <div class="step-verified-badge">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16"
+                                height="16">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            <span>Gmail Terverifikasi</span>
+                        </div>
+                        <h4>Buat Kata Sandi Akun</h4>
+                        <p class="text-muted-opt">Buat kata sandi yang aman untuk mengamankan akun BrewTopia Anda.</p>
+                    </div>
+
+                    <form id="createPasswordForm" onsubmit="handleCreatePasswordSubmit(event)">
+                        <div class="form-group">
+                            <label class="form-label" for="newPasswordInput">Kata Sandi Baru</label>
+                            <div class="input-icon-wrapper">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    class="input-icon">
+                                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                                </svg>
+                                <input type="password" id="newPasswordInput" class="form-input"
+                                    placeholder="Minimal 6 karakter..." required
+                                    oninput="evaluatePasswordStrength(this.value)">
+                                <button type="button" class="btn-toggle-pwd"
+                                    onclick="togglePasswordVisibility('newPasswordInput', this)"
+                                    aria-label="Lihat kata sandi">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        class="eye-icon">
+                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                        <circle cx="12" cy="12" r="3"></circle>
+                                    </svg>
+                                </button>
+                            </div>
+
+                            <!-- Password Strength Indicator Bar -->
+                            <div class="pwd-strength-container" id="pwdStrengthBox">
+                                <div class="pwd-strength-track">
+                                    <div class="pwd-strength-bar" id="pwdStrengthBar"></div>
+                                </div>
+                                <span class="pwd-strength-label" id="pwdStrengthLabel">Kekuatan: -</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="confirmPasswordInput">Konfirmasi Kata Sandi</label>
+                            <div class="input-icon-wrapper">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    class="input-icon">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                                <input type="password" id="confirmPasswordInput" class="form-input"
+                                    placeholder="Ulangi kata sandi..." required>
+                                <button type="button" class="btn-toggle-pwd"
+                                    onclick="togglePasswordVisibility('confirmPasswordInput', this)"
+                                    aria-label="Lihat kata sandi">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        class="eye-icon">
+                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8z"></path>
+                                        <circle cx="12" cy="12" r="3"></circle>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="form-options-row">
+                            <label class="checkbox-label terms-checkbox">
+                                <input type="checkbox" id="regTermsAgreed" checked required>
+                                <span>Saya menyetujui <a href="#terms" class="gold-link">Syarat & Ketentuan</a> serta <a
+                                        href="#privacy" class="gold-link">Kebijakan Privasi</a> BrewTopia.</span>
+                            </label>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-full btn-auth-submit" id="btnCompleteRegister">
+                            <span>Selesaikan & Masuk Akun</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                class="btn-icon">
+                                <polygon
+                                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+                                </polygon>
+                            </svg>
+                        </button>
+                    </form>
+                </div>
+
+                <!-- STEP 4: Registration Success Screen -->
+                <div class="reg-step-container text-center" id="regStep4">
+                    <div class="reg-success-visual">
+                        <div class="success-ring">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                        </div>
+                    </div>
+                    <h3 class="success-title">Pendaftaran Akun Berhasil!</h3>
+                    <p class="success-desc">Selamat datang, <strong id="successUserName">Kawan Ngopi</strong>! Akun
+                        BrewTopia Anda telah aktif.</p>
+
+                    <div class="success-rewards-card">
+                        <div class="reward-row">
+                            <span class="reward-icon">🎁</span>
+                            <div class="reward-info">
+                                <strong>Promo Diskon 15% (BREW15)</strong>
+                                <p>Otomatis aktif dan terpasang di keranjang belanja Anda.</p>
+                            </div>
+                        </div>
+                        <div class="reward-row">
+                            <span class="reward-icon">☕</span>
+                            <div class="reward-info">
+                                <strong>Bonus 100 BrewPoints</strong>
+                                <p>Telah ditambahkan ke saldo keanggotaan Anda.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-primary btn-full" onclick="closeAuthModal(); proceedAfterAuth();">
+                        <span>Mulai Belanja & Nikmati Promo</span>
+                    </button>
+                </div>
+
+                <p class="auth-switch-text text-center" id="regSwitchToLogin">
+                    Sudah memiliki akun? <a href="javascript:void(0)" onclick="switchAuthTab('login')">Masuk di sini</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Google Account Picker Simulation Modal -->
+    <div class="modal" id="googleModal">
+        <div class="modal-content google-modal-content">
+            <button class="modal-close-btn" onclick="closeGoogleModal()">&times;</button>
+            <div class="google-modal-header text-center">
+                <svg viewBox="0 0 48 48" width="36" height="36">
+                    <path fill="#EA4335"
+                        d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z" />
+                    <path fill="#4285F4"
+                        d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z" />
+                    <path fill="#FBBC05"
+                        d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z" />
+                    <path fill="#34A853"
+                        d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z" />
+                </svg>
+                <h3>Pilih Akun Google</h3>
+                <p>untuk melanjutkan ke <strong>BrewTopia Roasters</strong></p>
+            </div>
+
+            <div class="google-accounts-list">
+                <!-- Google Account Item 1 -->
+                <div class="google-account-item"
+                    onclick="loginWithGoogleAccount('Dana Tias', 'danatias@gmail.com', 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=120&auto=format&fit=crop')">
+                    <div class="google-avatar" style="background-color: #8B5A2B;">DY</div>
+                    <div class="google-info">
+                        <strong>Dana Tias</strong>
+                        <span>danatias@gmail.com</span>
+                    </div>
+                </div>
+
+                <!-- Google Account Item 2 -->
+                <div class="google-account-item"
+                    onclick="loginWithGoogleAccount('Kawan Kopi Indonesia', 'kawankopi.id@gmail.com', 'https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?w=120&auto=format&fit=crop')">
+                    <div class="google-avatar" style="background-color: #C5A059;">KK</div>
+                    <div class="google-info">
+                        <strong>Kawan Kopi Indonesia</strong>
+                        <span>kawankopi.id@gmail.com</span>
+                    </div>
+                </div>
+
+                <!-- Use Another Account -->
+                <div class="google-account-item google-other-account" onclick="promptCustomGoogleAccount()">
+                    <div class="google-avatar-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                    </div>
+                    <div class="google-info">
+                        <strong>Gunakan akun Google lain</strong>
+                    </div>
+                </div>
+            </div>
+
+            <div class="google-footer-disclaimer">
+                <p>Untuk melanjutkan, Google akan membagikan nama, alamat email, dan foto profil Anda kepada BrewTopia.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- USER PROFILE DASHBOARD MODAL (Rich Member Center) -->
+    <div class="modal" id="profileModal">
+        <div class="modal-content profile-modal-content">
+            <button class="modal-close-btn" id="closeProfileBtn" onclick="closeProfileModal()">&times;</button>
+
+            <!-- Profile Top Grid: Header + BrewPoints side by side -->
+            <div class="profile-top-grid">
+                <!-- Profile Hero Header -->
+                <div class="profile-header-card">
+                    <div class="profile-avatar-container">
+                        <div class="profile-avatar-wrapper" id="profileAvatarDisplay">
+                            <span class="avatar-letter" id="profileAvatarText">DY</span>
+                        </div>
+                        <button class="btn-edit-avatar" onclick="toggleAvatarPicker()" title="Ganti Avatar">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12"
+                                height="12">
+                                <path
+                                    d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z">
+                                </path>
+                                <circle cx="12" cy="13" r="4"></circle>
+                            </svg>
+                        </button>
+
+                        <!-- Avatar Preset Picker Popover -->
+                        <div class="avatar-picker-dropdown" id="avatarPickerDropdown" style="display: none;">
+                            <span class="picker-title">Pilih Icon Profil:</span>
+                            <div class="avatar-options-grid">
+                                <button type="button" class="avatar-opt-btn"
+                                    onclick="selectAvatarPreset('☕', '#8B5A2B')">☕</button>
+                                <button type="button" class="avatar-opt-btn"
+                                    onclick="selectAvatarPreset('👨‍🍳', '#3E2A1F')">👨‍🍳</button>
+                                <button type="button" class="avatar-opt-btn"
+                                    onclick="selectAvatarPreset('🌿', '#2E7D32')">🌿</button>
+                                <button type="button" class="avatar-opt-btn"
+                                    onclick="selectAvatarPreset('🔥', '#C5A059')">🔥</button>
+                                <button type="button" class="avatar-opt-btn"
+                                    onclick="selectAvatarPreset('✨', '#A47141')">✨</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="profile-main-meta">
+                        <div class="profile-name-row">
+                            <h3 class="profile-name" id="profileNameDisplay">Dana Tias</h3>
+                            <span class="badge-verified" title="Akun Gmail Terverifikasi">✓ Terverifikasi</span>
+                        </div>
+                        <p class="profile-email" id="profileEmailDisplay">danayoga@gmail.com</p>
+                        <div class="profile-tags-row">
+                            <span class="member-tier-pill" id="profileTierPill">☕ Gold Coffee Connoisseur</span>
+                            <span class="member-since-text" id="profileMemberSince">Member sejak Ags 2026</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- BrewPoints & Loyalty Card -->
+                <div class="brewpoints-gold-card">
+                    <div class="points-header">
+                        <div>
+                            <span class="points-label">Saldo Keanggotaan</span>
+                            <div class="points-val-row">
+                                <span class="points-number" id="profilePointsBalance">1.250</span>
+                                <span class="points-unit">BrewPoints</span>
+                            </div>
+                        </div>
+                        <button class="btn-redeem-points" onclick="openRedeemPointsModal()">
+                            <span>Tukar Poin</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14"
+                                height="14">
+                                <polyline points="9 18 15 12 9 6"></polyline>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div class="tier-progress-section">
+                        <div class="tier-progress-labels">
+                            <span>Tier Saat Ini: <strong id="currentTierName">Gold Member</strong></span>
+                            <span class="next-tier-info">350 poin lagi ke <strong>Platinum Master</strong></span>
+                        </div>
+                        <div class="tier-progress-track">
+                            <div class="tier-progress-fill" style="width: 78%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- end .profile-top-grid -->
+
+
+            <!-- Profile Section Tabs -->
+            <div class="profile-nav-tabs">
+                <button class="profile-tab-btn active" id="profTabBtnVouchers" onclick="switchProfileTab('vouchers')">
+                    <span class="tab-icon">🏷️</span>
+                    <span>Kupon Saya</span>
+                </button>
+                <button class="profile-tab-btn" id="profTabBtnOrders" onclick="switchProfileTab('orders')">
+                    <span class="tab-icon">📦</span>
+                    <span>Riwayat Pesanan</span>
+                </button>
+                <button class="profile-tab-btn" id="profTabBtnAddress" onclick="switchProfileTab('address')">
+                    <span class="tab-icon">📍</span>
+                    <span>Alamat</span>
+                </button>
+                <button class="profile-tab-btn" id="profTabBtnSettings" onclick="switchProfileTab('settings')">
+                    <span class="tab-icon">⚙️</span>
+                    <span>Pengaturan</span>
+                </button>
+            </div>
+
+            <!-- TAB 1: KUPON & PROMO SAYA -->
+            <div class="profile-tab-content active" id="profileTabVouchers">
+                <div class="vouchers-header-row">
+                    <h4>Voucher Diskon & Promo Aktif</h4>
+                    <span class="voucher-count-badge" id="voucherCountTag">3 Tersedia</span>
+                </div>
+
+                <!-- Custom Voucher Input Bar -->
+                <div class="voucher-input-bar">
+                    <input type="text" id="profileCustomPromoInput" class="voucher-input"
+                        placeholder="Masukkan kode promo baru (misal: BREW15)...">
+                    <button class="btn btn-primary btn-sm" onclick="applyCustomPromoFromProfile()">Klaim</button>
+                </div>
+
+                <!-- Vouchers Cards List -->
+                <div class="vouchers-cards-grid" id="vouchersCardsGrid">
+                    <!-- Voucher 1: BREW15 -->
+                    <div class="voucher-card highlight-card">
+                        <div class="voucher-card-left">
+                            <span class="voucher-badge-gold">DISCOUNT 15%</span>
+                            <h5 class="voucher-card-title">Diskon 15% Pelanggan Baru</h5>
+                            <p class="voucher-card-desc">Berlaku untuk semua varian biji kopi Nusantara tanpa minimum
+                                belanja.</p>
+                            <span class="voucher-expiry">Kode: <strong>BREW15</strong> • Berlaku s/d 31 Des 2026</span>
+                        </div>
+                        <div class="voucher-card-right">
+                            <button class="btn-use-voucher" id="btnUsePromoBREW15"
+                                onclick="claimPromo('BREW15'); closeProfileModal(); toggleCart(true);">
+                                <span>Gunakan</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Voucher 2: BEBASONGKIR -->
+                    <div class="voucher-card">
+                        <div class="voucher-card-left">
+                            <span class="voucher-badge-gold">FREE SHIPPING</span>
+                            <h5 class="voucher-card-title">Gratis Ongkir Se-Indonesia</h5>
+                            <p class="voucher-card-desc">Potongan ongkir s/d Rp25.000 dengan minimal transaksi
+                                Rp150.000.</p>
+                            <span class="voucher-expiry">Kode: <strong>BEBASONGKIR</strong> • Berlaku s/d 30 Nov
+                                2026</span>
+                        </div>
+                        <div class="voucher-card-right">
+                            <button class="btn-use-voucher"
+                                onclick="claimPromo('BEBASONGKIR'); closeProfileModal(); toggleCart(true);">
+                                <span>Gunakan</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Voucher 3: ROASTERVIP -->
+                    <div class="voucher-card">
+                        <div class="voucher-card-left">
+                            <span class="voucher-badge-gold">VIP 20%</span>
+                            <h5 class="voucher-card-title">Diskon 20% Koleksi Single Origin</h5>
+                            <p class="voucher-card-desc">Eksklusif member untuk pembelian Arabica Gayo & Java Preanger
+                                500g.</p>
+                            <span class="voucher-expiry">Kode: <strong>ROASTERVIP</strong> • Berlaku s/d 15 Okt
+                                2026</span>
+                        </div>
+                        <div class="voucher-card-right">
+                            <button class="btn-use-voucher"
+                                onclick="claimPromo('ROASTERVIP'); closeProfileModal(); toggleCart(true);">
+                                <span>Gunakan</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 2: RIWAYAT PESANAN -->
+            <div class="profile-tab-content" id="profileTabOrders">
+                <div class="orders-header-row">
+                    <h4>Riwayat Transaksi Kopi</h4>
+                    <span class="orders-subtitle">Pantau status pesanan dan re-order favoritmu</span>
+                </div>
+
+                <div class="orders-list-container" id="ordersListContainer">
+                    <!-- Dynamic orders injected via JavaScript -->
+                </div>
+            </div>
+
+            <!-- TAB 3: ALAMAT PENGIRIMAN -->
+            <div class="profile-tab-content" id="profileTabAddress">
+                <div class="address-header-row">
+                    <h4>Alamat Pengiriman Tersimpan</h4>
+                    <button class="btn btn-outline btn-sm" onclick="showAddAddressAlert()">+ Tambah Alamat</button>
+                </div>
+
+                <div class="saved-address-card default-address">
+                    <div class="address-card-header">
+                        <span class="badge-address-primary">Alamat Utama</span>
+                        <span class="address-label-name">Rumah</span>
+                    </div>
+                    <strong class="recipient-name" id="addressRecipientName">Dana Tias</strong>
+                    <p class="recipient-phone" id="addressRecipientPhone">0812-3456-7890</p>
+                    <p class="recipient-street" id="addressRecipientStreet">Jl. Senopati Raya No. 45, Kebayoran Baru,
+                        Jakarta Selatan, DKI Jakarta 12190</p>
+
+                    <div class="address-actions-row">
+                        <button class="btn-address-edit" onclick="showEditAddressModal()">Ubah Alamat</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 4: PENGATURAN AKUN & KEAMANAN -->
+            <div class="profile-tab-content" id="profileTabSettings">
+                <div class="settings-header-row">
+                    <h4>Pengaturan Profil & Keamanan</h4>
+                </div>
+
+                <form id="profileSettingsForm" onsubmit="handleProfileSettingsSave(event)">
+                    <div class="form-group">
+                        <label class="form-label" for="editProfileName">Nama Lengkap</label>
+                        <input type="text" id="editProfileName" class="form-input" value="Dana Tias" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="editProfilePhone">Nomor WhatsApp / HP</label>
+                        <input type="tel" id="editProfilePhone" class="form-input" value="081234567890">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="editProfileFavCoffee">Kopi Nusantara Favorit</label>
+                        <select id="editProfileFavCoffee" class="form-input form-select">
+                            <option value="gayo">Arabica Gayo (Aceh)</option>
+                            <option value="toraja">Toraja Specialty (Sulawesi)</option>
+                            <option value="mandailing">Mandailing Dark Roast (Sumatra)</option>
+                            <option value="java">Java Preanger (Jawa Barat)</option>
+                        </select>
+                    </div>
+
+                    <div class="notification-pref-box">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="prefPromoWa" checked>
+                            <span>Kirimkan info promo spesial & diskon member via WhatsApp</span>
+                        </label>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-full" style="margin-top: 16px;">
+                        <span>Simpan Perubahan</span>
+                    </button>
+                </form>
+            </div>
+
+            <!-- Profile Footer Actions (Logout) -->
+            <div class="profile-footer-row">
+                <button class="btn-logout" onclick="handleLogoutClick()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                        <polyline points="16 17 21 12 16 7"></polyline>
+                        <line x1="21" y1="12" x2="9" y2="12"></line>
+                    </svg>
+                    <span>Keluar dari Akun</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Scripts -->
+    <script src="app.js"></script>
+</body>
+
+</html>
